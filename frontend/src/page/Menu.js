@@ -11,6 +11,16 @@ const Menu = () => {
   const productData = useSelector((state) => state.product.productList);
 
   const productDisplay = productData.filter((el) => el._id === filterby)[0];
+  
+  if (!productDisplay) {
+    return (
+      <div className="p-2 md:p-4 text-center">
+        <p className="text-2xl font-bold text-slate-600">Product not found</p>
+        <AllProduct heading={"Explore our menu"} />
+      </div>
+    );
+  }
+
   const handleAddCartProduct = (e) => {
     dispatch(addCartItem(productDisplay));
   };
