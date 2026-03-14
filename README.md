@@ -2,7 +2,7 @@
 
 A high-performance, full-stack restaurant management and ordering application built with the MERN stack. Designed with a sleek UI and packed with features like real-time search, secure payments, and administrative product management.
 
-![Header Image](https://github.com/pattjoshi/MERN_restaurant/assets/78966839/d40a3da3-bf3a-45bd-9bb1-115fee37fd74)
+
 
 ## 🚀 Features
 
@@ -68,11 +68,7 @@ REACT_APP_STRIPE_PUBLIC_KEY = "your_stripe_public_key"
 ```
 4. Start the app: `npm start`
 
-## 📸 Screenshots
 
-| Desktop View | Mobile View |
-| :---: | :---: |
-| ![Desktop](https://github.com/pattjoshi/MERN_restaurant/assets/78966839/8ba88e63-7ac2-4b0c-b200-8b19ad2d987c) | ![Mobile](https://github.com/pattjoshi/MERN_restaurant/assets/78966839/df785f56-cf84-49c7-a2e5-4e49852b39d1) |
 
 ---
 
