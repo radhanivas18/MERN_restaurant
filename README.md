@@ -1,4 +1,4 @@
-# 🍽️ Aana Zoor - Modern MERN Restaurant App
+# 🍽️ NivasFoods - Modern MERN Restaurant App
 
 A high-performance, full-stack restaurant management and ordering application built with the MERN stack. Designed with a sleek UI and packed with features like real-time search, secure payments, and administrative product management.
 
