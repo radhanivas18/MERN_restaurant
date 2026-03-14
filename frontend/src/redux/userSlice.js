@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const savedUser = JSON.parse(localStorage.getItem("user")) || {};
+
 const initialState = {
-  email: "",
-  firstName: "",
-  image: "",
-  lastName: "",
-  _id: "",
+  email: savedUser.email || "",
+  firstName: savedUser.firstName || "",
+  image: savedUser.image || "",
+  lastName: savedUser.lastName || "",
+  _id: savedUser._id || "",
 };
 
 export const userSlice = createSlice({
@@ -13,13 +15,12 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     loginRedux: (state, action) => {
-      //   console.log(action.payload.data);
-      //   state.user = action.payload.data;
       state._id = action.payload.data._id;
       state.firstName = action.payload.data.firstName;
       state.lastName = action.payload.data.lastName;
       state.email = action.payload.data.email;
       state.image = action.payload.data.image;
+      localStorage.setItem("user", JSON.stringify(action.payload.data));
     },
     logoutRedux: (state, action) => {
       state._id = "";
@@ -27,6 +28,7 @@ export const userSlice = createSlice({
       state.lastName = "";
       state.email = "";
       state.image = "";
+      localStorage.removeItem("user");
     },
   },
 });
