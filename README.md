@@ -41,7 +41,7 @@ A high-performance, full-stack restaurant management and ordering application bu
 
 ### **Step 1: Clone the Repository**
 ```bash
-git clone https://github.com/pattjoshi/MERN_restaurant.git
+git clone https://github.com/radhanivas18/MERN_restaurant.git
 cd MERN_restaurant
 ```
 
@@ -63,7 +63,7 @@ PORT = 8080
 3. Create a `.env` file:
 ```env
 REACT_APP_SERVER_DOMIN = "http://localhost:8080"
-REACT_APP_ADMIN_EMAIL = "admin@example.com"
+REACT_APP_ADMIN_EMAIL = "your-admin-email@example.com"
 REACT_APP_STRIPE_PUBLIC_KEY = "your_stripe_public_key"
 ```
 4. Start the app: `npm start`
@@ -77,6 +77,6 @@ REACT_APP_STRIPE_PUBLIC_KEY = "your_stripe_public_key"
 ---
 
 ## 👨‍💻 Author
-**Pattjoshi**
+**Radhanivas**
 
 If you find this project helpful, give it a ⭐ to show your support! ❇️
