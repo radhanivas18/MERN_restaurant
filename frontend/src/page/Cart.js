@@ -22,26 +22,35 @@ const Cart = () => {
 
   const handlePayment = async () => {
     if (user.email) {
+      const serverDomin = process.env.REACT_APP_SERVER_DOMIN || "http://localhost:8080";
       const stripePromise = await loadStripe(
         process.env.REACT_APP_STRIPE_PUBLIC_KEY
       );
-      const res = await fetch(
-        `${process.env.REACT_APP_SERVER_DOMIN}/create-checkout-session`,
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(productCartItem),
+      try {
+        const res = await fetch(
+          `${serverDomin}/create-checkout-session`,
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(productCartItem),
+          }
+        );
+        if (res.status === 500) {
+           toast.error("Payment session creation failed");
+           return;
         }
-      );
-      if (res.statusCode === 500) return;
 
-      const data = await res.json();
-      console.log(data);
+        const data = await res.json();
+        console.log(data);
 
-      toast("Redirect to payment Gateway...!");
-      stripePromise.redirectToCheckout({ sessionId: data });
+        toast("Redirecting to payment Gateway...!");
+        stripePromise.redirectToCheckout({ sessionId: data });
+      } catch (err) {
+        console.error("Payment failed:", err);
+        toast.error("Failed to connect to server");
+      }
     } else {
       toast("You have not Login!");
       setTimeout(() => {

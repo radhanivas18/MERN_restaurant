@@ -40,32 +40,34 @@ const Login = () => {
     e.preventDefault();
     const { email, password } = data;
     if (email && password) {
-      const fetchData = await fetch(
-        `${process.env.REACT_APP_SERVER_DOMIN}/login`,
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(data),
+      const serverDomin = process.env.REACT_APP_SERVER_DOMIN || "http://localhost:8080";
+      try {
+        const fetchData = await fetch(
+          `${serverDomin}/login`,
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+
+        const dataRes = await fetchData.json();
+        toast(dataRes.message);
+
+        if (dataRes.alert) {
+          dispatch(loginRedux(dataRes));
+          setTimeout(() => {
+            navigate("/");
+          }, 1000);
         }
-      );
-
-      const dataRes = await fetchData.json();
-      //   console.log(dataRes);
-
-      toast(dataRes.message);
-
-      if (dataRes.alert) {
-        dispatch(loginRedux(dataRes));
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
+      } catch (err) {
+        console.error("Login failed:", err);
+        toast.error("Failed to connect to server");
       }
-
-      // console.log(userData); // data come from redux
     } else {
-      alert("Please Enter required fields");
+      toast("Please Enter required fields");
     }
   };
 

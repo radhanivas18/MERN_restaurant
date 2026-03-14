@@ -8,10 +8,9 @@ import AllProduct from "../component/AllProduct";
 
 const Home = () => {
   const productData = useSelector((state) => state.product.productList);
-  const homeProductCartList = productData.slice(20, 25);
+  const homeProductCartList = productData.slice(0, 5);
   const homeProductCartListVegetables = productData.filter(
-    (el) => el.category === "vegetable",
-    []
+    (el) => el.category === "vegetable"
   );
   const loadingArray = new Array(4).fill(null);
   const loadingArrayFeature = new Array(10).fill(null);

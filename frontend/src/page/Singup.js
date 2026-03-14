@@ -55,23 +55,27 @@ const Singup = () => {
     const { firstName, email, password, confirmPassword } = data;
     if (firstName && email && password && confirmPassword) {
       if (password === confirmPassword) {
-        const fetchData = await fetch(
-          `${process.env.REACT_APP_SERVER_DOMIN}/signup`,
-          {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(data),
+        const serverDomin = process.env.REACT_APP_SERVER_DOMIN || "http://localhost:8080";
+        try {
+          const fetchData = await fetch(
+            `${serverDomin}/signup`,
+            {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(data),
+            }
+          );
+
+          const dataRes = await fetchData.json();
+          toast(dataRes.message);
+          if (dataRes.alert) {
+            navigate("/login");
           }
-        );
-
-        const dataRes = await fetchData.json();
-
-        // alert(dataRes.message);
-        toast(dataRes.message);
-        if (dataRes.alert) {
-          navigate("/login");
+        } catch (err) {
+          console.error("Signup failed:", err);
+          toast.error("Failed to connect to server");
         }
       } else {
         alert("password and confirm password not equal");

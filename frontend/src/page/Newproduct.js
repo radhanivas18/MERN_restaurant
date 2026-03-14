@@ -42,31 +42,35 @@ const Newproduct = () => {
     const { name, image, category, price } = data;
 
     if (name && image && category && price) {
-      const fetchData = await fetch(
-        `${process.env.REACT_APP_SERVER_DOMIN}/uploadProduct`,
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const serverDomin = process.env.REACT_APP_SERVER_DOMIN || "http://localhost:8080";
+      try {
+        const fetchData = await fetch(
+          `${serverDomin}/uploadProduct`,
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
 
-      const fetchRes = await fetchData.json();
+        const fetchRes = await fetchData.json();
+        toast(fetchRes.message);
 
-      //   console.log(fetchRes);
-      toast(fetchRes.message);
-
-      setData(() => {
-        return {
-          name: "",
-          category: "",
-          image: "",
-          price: "",
-          description: "",
-        };
-      });
+        setData(() => {
+          return {
+            name: "",
+            category: "",
+            image: "",
+            price: "",
+            description: "",
+          };
+        });
+      } catch (err) {
+        console.error("Upload failed:", err);
+        toast.error("Failed to connect to server");
+      }
     } else {
       toast("Enter required Fields");
     }
